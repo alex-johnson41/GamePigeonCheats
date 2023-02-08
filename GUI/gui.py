@@ -52,7 +52,7 @@ class WordGame:
 
         self.frame = tk.Frame(self.master)
         self.master.config(background = "green")
-        self.master.geometry("800x500+30+10")
+        self.master.geometry("800x500+%d+%d" % (self.master.master.winfo_x(), self.master.master.winfo_y()))
 
         header = tk.Label(
             self.frame,
