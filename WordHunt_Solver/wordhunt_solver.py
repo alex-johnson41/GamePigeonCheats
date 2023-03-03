@@ -5,12 +5,12 @@ import copy
 class WordHunt_Solver():
 
     def __init__(self, letters):
-        self.wordList = [] #List of all english words
+        self.wordList = [] #List of all english words whose length is >= 3
         self.solutions = [] #Words that can be made using the grid
         self.letters2D = [] #2D array of letters on board
         self.letters = [] #1D array of letters on board
         self.usedLetters2D = [[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]]
-        self.letterPath = []
+        self.letterPath = [] #2D array recording the path to draw the letters
 
         self.processInput(letters)
         self.wordList = self.createWordList()
@@ -38,12 +38,12 @@ class WordHunt_Solver():
             self.letters2D.append(a)
             
     def solve(self):
-        solutionsDict = {}
+        solutionsDict = {} #Key:Value pairs that store the word and the path to draw the word respectively
         for word in self.wordList: 
             if self.wordIsPossible(word):
                 if self.checkForWord(word):
-                    solutionsDict[word] = copy.deepcopy(self.letterPath)
-        answers = sorted(list(solutionsDict.items()), key = lambda key : len(key[0]), reverse=False)
+                    solutionsDict[word] = copy.deepcopy(self.letterPath) #Copies the values from letterpath to the dictionary with the word
+        answers = sorted(list(solutionsDict.items()), key = lambda key : len(key[0]), reverse=False) #Sorts dictionary by the length of the key (the word)
         sortedAnswers = {ele[0] : ele[1]  for ele in answers}
         return sortedAnswers
 
@@ -56,13 +56,13 @@ class WordHunt_Solver():
 
     #Checks to see if the word can be created using the grid
     def checkForWord(self,word):
-        startingSpots = self.getOccurances(word[0], self.letters) #Indexes of starting letter
-        for i in startingSpots: #Each possible starting position (Repeat letters)
+        startingSpots = self.getOccurances(word[0], self.letters) #Indexes of starting letter on the grid
+        for i in startingSpots: #For each possible starting position (Repeat letters)
             self.resetUsedLetters()
             row = i // 4 
             column = i % 4 
-            self.usedLetters2D[row][column] = 1
-            if self.altFindNextLetter(row, column, word, 1):
+            self.usedLetters2D[row][column] = 1 #Mark the position as the start of the word
+            if self.altFindNextLetter(row, column, word, 1): #Recursively search for eadh letter
                 return True
 
 
@@ -72,7 +72,7 @@ class WordHunt_Solver():
     #Recursive function to fine a path for the word on the board
     def altFindNextLetter(self,startRow, startColumn, word, letterIndex):
         if letterIndex < len(word): #If it's reached the end of the word
-            numOfNextLetters = self.getOccurances(word[letterIndex], self.letters) #Figure out how many of the letter its looking for is on the board
+            numOfNextLetters = self.getOccurances(word[letterIndex], self.letters) #Find occurances of desired letter on board
             for i in numOfNextLetters: #Loop through possible letter locations
 
                 #Calculate the row and column of the desired letter
@@ -80,15 +80,17 @@ class WordHunt_Solver():
                 nextLetterColumn = i % 4 
 
                 #Figure out if the desired letter is adjacent or diaganol to the current letter and if the desired letter has already been used
-                if startRow - nextLetterRow > -2 and startRow - nextLetterRow < 2 and startColumn - nextLetterColumn > -2 and startColumn - nextLetterColumn < 2 and self.usedLetters2D[nextLetterRow][nextLetterColumn] == 0:    
+                if (startRow - nextLetterRow > -2 and startRow - nextLetterRow < 2 and startColumn - nextLetterColumn > -2 
+                and startColumn - nextLetterColumn < 2 and self.usedLetters2D[nextLetterRow][nextLetterColumn] == 0): 
+                   
                     self.usedLetters2D[nextLetterRow][nextLetterColumn] = 2 #Mark the desired letter as used
                     found = self.altFindNextLetter(nextLetterRow, nextLetterColumn, word, letterIndex + 1) #Call the function again and move onto the next letter
-                    if found: #If a path for the word is found, bounce through all stack frames back up to main function
+                    if found: #If a path for the word was found, bounce back up through stack frames
                         return True
-            self.usedLetters2D[startRow][startColumn] = 0
+            self.usedLetters2D[startRow][startColumn] = 0 
         else:
             self.letterPath = self.usedLetters2D.copy()
-            self.usedLetters2D[startRow][startColumn] = 3
+            self.usedLetters2D[startRow][startColumn] = 3 #Mark last letter of word
             return True #Once this point is hit it means a path for the word has been found
 
     #Resets the grid showing what letters have been used

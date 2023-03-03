@@ -109,11 +109,11 @@ class Wordbites_Solver:
             return True
 
     #Returns index of occurances of a char within a list
-    def getOccurances(self,char, array):
+    def getOccurances(self,char, list):
         indices = []
-        for idx, value in enumerate(array): #Loop through array fed in
-            if isinstance(array[idx], list): #If item is a list
-                for item in array[idx]: #Loop through the list to test if any chars are what we need
+        for idx, value in enumerate(list): #Loop through list fed in
+            if isinstance(list[idx], list): #If item is a list
+                for item in list[idx]: #Loop through the list to test if any chars are what we need
                     if item == char:
                         indices.append(idx)
                         break
