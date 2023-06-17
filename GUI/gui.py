@@ -4,7 +4,7 @@ from solvers import wordbites_solver as wbSolver
 from solvers import wordhunt_solver as whSolver
 
 class MainWindow():
-    def __init__(self, master):
+    def __init__(self, master: tk.Tk):
         self.master = master
         master.config(background="green")
         master.geometry("800x500")
@@ -37,10 +37,10 @@ class MainWindow():
     def clk_wordbites(self):
         self.master.withdraw()
         toplevel = tk.Toplevel(self.master)
-        app = WordBites( toplevel, "WordBites")
+        app = WordBites(toplevel, "WordBites")
 
 class WordGame: 
-    def __init__(self, master, gameName):
+    def __init__(self, master: tk.Toplevel, gameName: str):
         self.master = master
         self.frame = tk.Frame(self.master)
         self.master.config(background = "green")
@@ -58,11 +58,11 @@ class WordGame:
     
     def close_windows(self):
         self.master.destroy()
-        self.master.master.deiconify()
+        self.master.master.deiconify() # type: ignore
 
 class Anagrams(WordGame):
 
-    def __init__(self, master,gameName):
+    def __init__(self, master: tk.Toplevel, gameName: str):
         super().__init__(master,gameName)
         self.words = []
         self.inp = tk.Entry(self.frame)
@@ -101,7 +101,7 @@ class Anagrams(WordGame):
 
 class WordHunt(WordGame):
 
-    def __init__(self, master,gameName):
+    def __init__(self, master: tk.Toplevel, gameName: str):
         super().__init__(master,gameName)    
         self.words = {}
         self.inp = tk.Entry(self.frame)
@@ -181,7 +181,7 @@ class WordHunt(WordGame):
     
 
 class WordBites(WordGame):
-    def __init__(self, master,gameName):
+    def __init__(self, master: tk.Toplevel, gameName: str):
         super().__init__(master,gameName)
         self.words = []
         self.sLetters = tk.Entry(self.frame)
