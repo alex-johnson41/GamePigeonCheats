@@ -1,10 +1,11 @@
 import itertools
 from typing import Dict, List
 
+
 class Anagrams_Solver():
 
-    def __init__(self, letters):
-        self.letters = []
+    def __init__(self, letters: List[str]):
+        self.letters: List[str] = []
         for letter in letters:
             self.letters.append(letter)
         self.wordList = self.createWordList()
@@ -25,7 +26,7 @@ class Anagrams_Solver():
 
     def getCombinations(self) -> List[str]:
         combos = []
-        s = ' '
+        s = ''
         for r in range(3, len(self.letters)+1,1):
             for combination in itertools.permutations(self.letters, r):
                 for char in combination:
@@ -34,10 +35,9 @@ class Anagrams_Solver():
                 s = ''
         return combos
 
-    def getWords(self, combos) -> List[str]:
+    def getWords(self, combos: List[str]) -> List[str]:
         words = []
         for word in combos:
             if word in self.wordList and word not in words:
                 words.append(word)
-                #print(word)
         return words
