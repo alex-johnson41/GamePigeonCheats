@@ -13,23 +13,16 @@ class MainWindow():
             text="GamePigeon Solver", 
             font=("Ariel", 40),
             background="Green",
-            
             )
-
         frm_buttons = tk.Frame(master, background="green")
-
         btn_anagrams = tk.Button(frm_buttons,text="Anagrams", font=("Ariel", 20), command= self.clk_anagrams)
         btn_wordHunt = tk.Button(frm_buttons,text="Word Hunt",font=("Ariel", 20),command= self.clk_wordhunt)
         btn_wordBites = tk.Button(frm_buttons,text="Word Bites",font=("Ariel", 20), command= self.clk_wordbites)
-        
-        
         label.pack(pady=50)
         btn_anagrams.grid(row = 0, column=0, padx= 10)
         btn_wordHunt.grid(row=0,column=1,padx= 10)
         btn_wordBites.grid(row=0, column=2,padx= 10)
-        
         frm_buttons.pack()
-
 
     def clk_anagrams(self):
         self.master.withdraw()
@@ -49,18 +42,14 @@ class MainWindow():
 class WordGame: 
     def __init__(self, master, gameName):
         self.master = master
-
         self.frame = tk.Frame(self.master)
         self.master.config(background = "green")
         self.master.geometry("800x500+%d+%d" % (self.master.master.winfo_x(), self.master.master.winfo_y()))
-
         header = tk.Label(
             self.frame,
             text=gameName, 
             font=("Ariel", 40),
-
             )
-
         quitButton = tk.Button(self.frame, text = 'Back', width = 25, command= lambda: self.close_windows(), pady=3)
         header.grid(row = 0, column=1)
         quitButton.grid(row=1, column =1)
@@ -95,7 +84,6 @@ class Anagrams(WordGame):
         lbl_fillSpace.grid(row=2, column = 2)
         self.inp.grid(row=2, column=1)
         lbl_entryLabel.grid(row=2,column=0)
-
    
     def hitEnter(event, self):
         test = aSolver.Anagrams_Solver(self.inp.get())
@@ -142,8 +130,6 @@ class WordHunt(WordGame):
         lbl_entryLabel.grid(row=2, column = 0)
         lbl_fillSpace.grid(row=2, column =2)
         
-
-
     def printWords(self):
         txtBox = tk.Text(self.frame, font=("Arial",20))
         for key, value, in self.words.items():
@@ -161,7 +147,6 @@ class WordHunt(WordGame):
         map = pair[1]
         word = pair[0]
         self.currentWord.config(text=word)
-        
         for i in range(4):
             for j in range(4):
                 self.gridDict[(i,j)].config(background="Grey")
@@ -171,8 +156,6 @@ class WordHunt(WordGame):
                     self.gridDict[(i,j)].config(background="#a68d02")
                 if map[i][j] == 3:
                     self.gridDict[(i,j)].config(background="Red")
-                
-        
 
     def createGameGrid(self):
         self.gameFrame = tk.Frame(self.frame, pady="15")
@@ -196,7 +179,6 @@ class WordHunt(WordGame):
                 self.gridDict[(i,j)] = lbl_letter
         self.gameFrame.grid(row=4, column = 1)
     
-
 
 class WordBites(WordGame):
     def __init__(self, master,gameName):

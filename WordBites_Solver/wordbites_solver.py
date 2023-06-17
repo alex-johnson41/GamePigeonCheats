@@ -1,3 +1,6 @@
+from typing import List
+
+
 class Wordbites_Solver:
 
     def __init__(self,sLetters,hLetters,vLetters):
@@ -23,7 +26,7 @@ class Wordbites_Solver:
         for i in range(0, len(vLetters), 2):
             self.verticalLetters.append(vLetters[i]  + vLetters[i+1])
 
-    def getAllLetters(self):
+    def getAllLetters(self) -> List[str]:
         allLetters = []
         for letter in self.singleLetters:
             allLetters.append(letter)
@@ -35,7 +38,7 @@ class Wordbites_Solver:
                 allLetters.append(char)
         return allLetters
 
-    def solve(self):
+    def solve(self) -> List[str]:
         vOptions = self.verticalCombinations() #Tiles on board organized for creating vertical combinations
         hOptions = self.horizontalCombinations() #Same as above but horizontal.
         vSolutions = [] #Vertical Solutions
@@ -58,7 +61,7 @@ class Wordbites_Solver:
         return answers
 
     #If all the letters for the word aren't on the board, go to the next word     
-    def wordIsPossible(self,word): 
+    def wordIsPossible(self,word) -> bool: 
         allLetters = self.getAllLetters() #Combine all letters on the board to one list
         for letter in word:     
             if letter not in allLetters: 
@@ -66,7 +69,7 @@ class Wordbites_Solver:
         return True
 
     #Attempt to build the word 
-    def checkForWord(self,word, options):
+    def checkForWord(self,word, options) -> bool:
         startingSpots = self.getOccurances(word[0], options) #Indexes of starting spots
         for i in startingSpots:
             usedLetters = self.resetUsedLetters(len(options))
@@ -79,7 +82,7 @@ class Wordbites_Solver:
                     return True
         return False
 
-    def findNextLetter(self,word, letterIndex, usedLetters, options):
+    def findNextLetter(self,word, letterIndex, usedLetters, options) -> bool:
         if letterIndex < len(word):
             numOfNextLetters = self.getOccurances(word[letterIndex], options)
             for i in numOfNextLetters:
@@ -103,7 +106,7 @@ class Wordbites_Solver:
             return True
 
     #Returns index of occurances of a char within a list
-    def getOccurances(self,char, list):
+    def getOccurances(self,char, list) -> List[int]:
         indices = []
         for idx, value in enumerate(list): #Loop through list fed in
             if isinstance(list[idx], list): #If item is a list
@@ -122,14 +125,12 @@ class Wordbites_Solver:
             usedLetters.append(0)
         return usedLetters
 
-    def verticalCombinations(self):
+    def verticalCombinations(self) -> List[List[str]]:
         letters = []
-
         for letter in self.singleLetters:
             letters.append(letter)
         for letter in self.verticalLetters:
             letters.append(letter)
-        
         for letter in self.horizontalLetters:
             listInHL = [] #List storing horizontal letter pairs
             for char in letter:
@@ -137,28 +138,18 @@ class Wordbites_Solver:
             letters.append(listInHL)
         return letters
 
-        #combinations = getCombinations(letters)
-        #possibleWords = convertCombinationsToStr(combinations)
-        #return combinations
-
-    def horizontalCombinations(self):
+    def horizontalCombinations(self) -> List[List[str]]:
         letters = []
-
         for letter in self.singleLetters:
             letters.append(letter)
         for letter in self.horizontalLetters:
             letters.append(letter)
-
         for letter in self.verticalLetters:
             listInVL = [] #List storing vertical letter pairs
             for char in letter:
                 listInVL.append(char)
             letters.append(listInVL) 
         return letters
-
-        #combinations = getCombinations(letters)
-        #possibleWords = convertCombinationsToStr(combinations)      
-        #return combinations
 
 
 

@@ -1,5 +1,5 @@
-
 import copy
+from typing import Dict, List
 
 
 class WordHunt_Solver():
@@ -11,11 +11,10 @@ class WordHunt_Solver():
         self.letters = [] #1D array of letters on board
         self.usedLetters2D = [[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]]
         self.letterPath = [] #2D array recording the path to draw the letters
-
         self.processInput(letters)
         self.wordList = self.createWordList()
 
-    def createWordList(self):
+    def createWordList(self) -> Dict[str : str]:
         wordList = {}
         file = open('wordhunt_wordlist.txt')
         for line in file:
@@ -24,10 +23,6 @@ class WordHunt_Solver():
         return wordList
 
     def processInput(self,letters):
-        #inp = None
-        #print("Welcome to Wordhunt Solver")
-        #print("Enter all letters with no spaces, starting from the top left and reading left to right")
-        #inp = input()
         x = 0
         for i in range(4):
             a = []
@@ -37,8 +32,8 @@ class WordHunt_Solver():
                 x += 1 
             self.letters2D.append(a)
             
-    def solve(self):
-        solutionsDict = {} #Key:Value pairs that store the word and the path to draw the word respectively
+    def solve(self) -> Dict[str : List[List[int]]]:
+        solutionsDict: Dict[str : List[List[int]]] = {} 
         for word in self.wordList: 
             if self.wordIsPossible(word):
                 if self.checkForWord(word):
@@ -48,14 +43,14 @@ class WordHunt_Solver():
         return sortedAnswers
 
     #If all the letters for the word aren't in the grid, go to the next word     
-    def wordIsPossible(self,word): 
+    def wordIsPossible(self,word) -> bool: 
         for letter in word:     
             if letter not in self.letters: 
                 return False
         return True
 
     #Checks to see if the word can be created using the grid
-    def checkForWord(self,word):
+    def checkForWord(self,word) -> bool:
         startingSpots = self.getOccurances(word[0], self.letters) #Indexes of starting letter on the grid
         for i in startingSpots: #For each possible starting position (Repeat letters)
             self.resetUsedLetters()
@@ -65,12 +60,8 @@ class WordHunt_Solver():
             if self.altFindNextLetter(row, column, word, 1): #Recursively search for each letter
                 return True
 
-
-            #if searchWord(word, row, column):
-            #    return True
-
     #Recursive function to fine a path for the word on the board
-    def altFindNextLetter(self,startRow, startColumn, word, letterIndex):
+    def altFindNextLetter(self,startRow, startColumn, word, letterIndex) -> bool:
         if letterIndex < len(word): #If it's reached the end of the word
             numOfNextLetters = self.getOccurances(word[letterIndex], self.letters) #Find occurances of desired letter on board
             for i in numOfNextLetters: #Loop through possible letter locations
@@ -100,7 +91,7 @@ class WordHunt_Solver():
                 self.usedLetters2D[i][j] = 0
 
     #Get indexes of occurances of a character in a list
-    def getOccurances(self,char, list):
+    def getOccurances(self,char, list) -> List[str]:
         indices = []
         for idx, value in enumerate(list):
             if value == char:

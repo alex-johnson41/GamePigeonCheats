@@ -1,19 +1,21 @@
 import itertools
+from typing import Dict, List
 
 class Anagrams_Solver():
+
     def __init__(self, letters):
         self.letters = []
         for letter in letters:
             self.letters.append(letter)
         self.wordList = self.createWordList()
         
-    def solve(self):
+    def solve(self) -> List[str]:
         combos = self.getCombinations()
         words = self.getWords(combos)
         words = sorted(words, key= len, reverse=True)
         return words
 
-    def createWordList(self):
+    def createWordList(self) -> Dict[str : str]:
         file = open('anagrams_wordList.txt')
         wordList = {}
         for line in file:
@@ -21,18 +23,7 @@ class Anagrams_Solver():
             wordList[line] = line
         return wordList
 
-
-    def getInput(self):
-        inp = None
-
-        print("Welcome to Anagrams Solver")
-        print("Enter all letters with no spaces, then press enter")
-        inp = input()
-        for char in inp:
-            self.letters.append(char)
-
-
-    def getCombinations(self):
+    def getCombinations(self) -> List[str]:
         combos = []
         s = ' '
         for r in range(3, len(self.letters)+1,1):
@@ -43,7 +34,7 @@ class Anagrams_Solver():
                 s = ''
         return combos
 
-    def getWords(self, combos):
+    def getWords(self, combos) -> List[str]:
         words = []
         for word in combos:
             if word in self.wordList and word not in words:
