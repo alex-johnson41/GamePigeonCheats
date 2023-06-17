@@ -62,7 +62,7 @@ class WordHunt_Solver():
             row = i // 4 
             column = i % 4 
             self.usedLetters2D[row][column] = 1 #Mark the position as the start of the word
-            if self.altFindNextLetter(row, column, word, 1): #Recursively search for eadh letter
+            if self.altFindNextLetter(row, column, word, 1): #Recursively search for each letter
                 return True
 
 
