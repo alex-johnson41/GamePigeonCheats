@@ -1,7 +1,7 @@
 import tkinter as tk
-from Anagrams_Solver import anagrams_solver as aSolver
-from WordBites_Solver import wordbites_solver as wbSolver
-from WordHunt_Solver import wordhunt_solver as whSolver
+from solvers import anagrams_solver as aSolver
+from solvers import wordbites_solver as wbSolver
+from solvers import wordhunt_solver as whSolver
 
 class MainWindow():
     def __init__(self, master):
