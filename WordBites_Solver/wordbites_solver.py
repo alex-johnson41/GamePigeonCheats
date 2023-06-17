@@ -13,7 +13,7 @@ class Wordbites_Solver:
         self.processInput(sLetters,hLetters,vLetters)
 
     def createWordList(self):
-        file = open('wordbites_wordList.txt')
+        file = open('word_lists/wordbites_wordList.txt')
         for line in file:
             line = line.strip()
             self.wordList[line] = line

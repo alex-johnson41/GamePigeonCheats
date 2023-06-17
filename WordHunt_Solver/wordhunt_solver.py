@@ -14,9 +14,9 @@ class WordHunt_Solver():
         self.processInput(letters)
         self.wordList = self.createWordList()
 
-    def createWordList(self) -> Dict[str : str]:
+    def createWordList(self) -> Dict[str, str]:
         wordList = {}
-        file = open('wordhunt_wordlist.txt')
+        file = open('word_lists/wordhunt_wordlist.txt')
         for line in file:
             line = line.strip()
             wordList[line] = line
@@ -32,7 +32,7 @@ class WordHunt_Solver():
                 x += 1 
             self.letters2D.append(a)
             
-    def solve(self) -> Dict[str : List[List[int]]]:
+    def solve(self) -> Dict[str, List[List[int]]]:
         solutionsDict: Dict[str : List[List[int]]] = {} 
         for word in self.wordList: 
             if self.wordIsPossible(word):

@@ -15,8 +15,8 @@ class Anagrams_Solver():
         words = sorted(words, key= len, reverse=True)
         return words
 
-    def createWordList(self) -> Dict[str : str]:
-        file = open('anagrams_wordList.txt')
+    def createWordList(self) -> Dict[str, str]:
+        file = open('word_lists/anagrams_wordList.txt')
         wordList = {}
         for line in file:
             line = line.strip()
