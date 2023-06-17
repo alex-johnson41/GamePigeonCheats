@@ -140,7 +140,6 @@ class WordHunt(WordGame):
         test = whSolver.WordHunt_Solver(self.inp.get())
         self.words = test.solve()
         self.createGameGrid()
-        #self.printWords()
 
     def hitSpace(event, self): #type: ignore
         pair = self.words.popitem()
