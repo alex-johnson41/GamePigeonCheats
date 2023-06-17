@@ -4,7 +4,7 @@ from gui import gui
 def main():
     root = tk.Tk()
     root.title("window")
-    cls = gui.MainWindow(root)
+    gui.MainWindow(root)
     root.mainloop()
 
 if __name__ == "__main__":
