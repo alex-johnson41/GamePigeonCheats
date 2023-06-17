@@ -4,7 +4,7 @@ from typing import Dict, List
 
 class WordHunt_Solver():
 
-    def __init__(self, letters):
+    def __init__(self, letters: List[str]):
         self.wordList = {} #List of all english words whose length is >= 3
         self.solutions = [] #Words that can be made using the grid
         self.letters2D = [] #2D array of letters on board
@@ -22,7 +22,7 @@ class WordHunt_Solver():
             wordList[line] = line
         return wordList
 
-    def processInput(self,letters):
+    def processInput(self, letters: List[str]):
         x = 0
         for i in range(4):
             a = []
@@ -89,7 +89,7 @@ class WordHunt_Solver():
                 self.usedLetters2D[i][j] = 0
 
     #Get indexes of occurances of a character in a list
-    def getOccurances(self,char, list) -> List[int]:
+    def getOccurances(self, char: str, list: List[str]) -> List[int]:
         indices = []
         for idx, value in enumerate(list):
             if value == char:
