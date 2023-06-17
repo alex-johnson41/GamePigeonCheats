@@ -5,7 +5,7 @@ class Wordbites_Solver:
         self.singleLetters = [] #Single letters on the board
         self.horizontalLetters = [] #Horizontal letter pairs
         self.verticalLetters = [] #Vertical letter pairs
-        self.wordList = [] #List of english words
+        self.wordList = {} #Dictionary of english words
         self.createWordList()
         self.processInput(sLetters,hLetters,vLetters)
 
@@ -13,17 +13,13 @@ class Wordbites_Solver:
         file = open('wordbites_wordList.txt')
         for line in file:
             line = line.strip()
-            self.wordList.append(line)
+            self.wordList[line] = line
 
     def processInput(self,sLetters,hLetters,vLetters):
-        
-
         for letter in sLetters:
             self.singleLetters.append(letter)
-
         for i in range(0, len(hLetters), 2):
             self.horizontalLetters.append(hLetters[i] + hLetters[i+1])
-
         for i in range(0, len(vLetters), 2):
             self.verticalLetters.append(vLetters[i]  + vLetters[i+1])
 
@@ -38,7 +34,6 @@ class Wordbites_Solver:
             for char in letter:
                 allLetters.append(char)
         return allLetters
-
 
     def solve(self):
         vOptions = self.verticalCombinations() #Tiles on board organized for creating vertical combinations
@@ -61,7 +56,6 @@ class Wordbites_Solver:
         answers = sorted(answers, key=len, reverse=True)
         #print(answers)
         return answers
-
 
     #If all the letters for the word aren't on the board, go to the next word     
     def wordIsPossible(self,word): 

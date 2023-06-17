@@ -5,7 +5,7 @@ import copy
 class WordHunt_Solver():
 
     def __init__(self, letters):
-        self.wordList = [] #List of all english words whose length is >= 3
+        self.wordList = {} #List of all english words whose length is >= 3
         self.solutions = [] #Words that can be made using the grid
         self.letters2D = [] #2D array of letters on board
         self.letters = [] #1D array of letters on board
@@ -16,11 +16,11 @@ class WordHunt_Solver():
         self.wordList = self.createWordList()
 
     def createWordList(self):
-        wordList = []
+        wordList = {}
         file = open('wordhunt_wordlist.txt')
         for line in file:
             line = line.strip()
-            wordList.append(line)
+            wordList[line] = line
         return wordList
 
     def processInput(self,letters):

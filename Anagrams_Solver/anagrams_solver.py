@@ -15,10 +15,10 @@ class Anagrams_Solver():
 
     def createWordList(self):
         file = open('anagrams_wordList.txt')
-        wordList = []
+        wordList = {}
         for line in file:
             line = line.strip()
-            wordList.append(line)
+            wordList[line] = line
         return wordList
 
 
