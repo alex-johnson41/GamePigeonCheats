@@ -1,3 +1,2 @@
 .DS_Store
-GUI/__pycache__/gui.cpython-310.pyc
-GUI/__pycache__/guiTesting.cpython-310.pyc
+__pycache__/
