@@ -1,7 +1,6 @@
 import tkinter as tk
 from GUI import gui
 
-
 def main():
     root = tk.Tk()
     root.title("window")
@@ -10,13 +9,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
-#Test Letters:
-#ahnegtpdatosivhe
-
-#Sample
-#wtcfph
-#inls
-#oyeadi
