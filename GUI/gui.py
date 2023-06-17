@@ -85,7 +85,7 @@ class Anagrams(WordGame):
         self.inp.grid(row=2, column=1)
         lbl_entryLabel.grid(row=2,column=0)
    
-    def hitEnter(event, self):
+    def hitEnter(event, self): #type: ignore
         test = aSolver.Anagrams_Solver(self.inp.get())
         self.words = test.solve()
         txtBox = tk.Text(
@@ -136,13 +136,13 @@ class WordHunt(WordGame):
             txtBox.insert("end",key+"\n")
         txtBox.pack()
 
-    def hitEnter(event, self):
+    def hitEnter(event, self): #type: ignore
         test = whSolver.WordHunt_Solver(self.inp.get())
         self.words = test.solve()
         self.createGameGrid()
         #self.printWords()
 
-    def hitSpace(event, self):
+    def hitSpace(event, self): #type: ignore
         pair = self.words.popitem()
         map = pair[1]
         word = pair[0]
@@ -227,7 +227,7 @@ class WordBites(WordGame):
             )
         lbl_fillSpace.grid(row=2,column =2)
 
-    def hitEnter(event, self):
+    def hitEnter(event, self): #type: ignore
         test = wbSolver.Wordbites_Solver(self.sLetters.get(),self.hLetters.get(),self.vLetters.get())
         self.words = test.solve()
         txtBox = tk.Text(self.frame, font=("Arial", 20), width = 30, height = 10)
