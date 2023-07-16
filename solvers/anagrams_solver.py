@@ -13,7 +13,7 @@ class Anagrams_Solver():
     def solve(self) -> List[str]:
         combos = self.getCombinations()
         words = self.getWords(combos)
-        words = sorted(words, key= len, reverse=True)
+        words = sorted(words, key=lambda x: (len(x),x), reverse=True)
         return words
 
     def createWordList(self) -> Dict[str, str]:
