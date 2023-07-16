@@ -95,27 +95,3 @@ class WordHunt_Solver():
             if value == char:
                 indices.append(idx)
         return indices
-
-
-    ### OLD CODE --- DOES NOT WORK
-
-    #Search for the word in the grid
-    #def searchWord(word, row, column):
-    #    for j in range(len(word)-1): #For each letter in the word, search for the next letter in the surrounding region
-    #        row, column = findNextLetter(row, column, word[j+1]) #Finds row and column of next letter
-    #        if row == -1: #If the next letter can't be reached move on to the next word
-    #            return False
-    #    resetUsedLetters()
-    #    return True
-                
-    #Checks to see if the next letter of the word is in the surrounding squares and not used 
-    #def findNextLetter(startRow, startColumn, nextLetter):
-    #    for i in range(startRow -1, startRow + 2):
-    #        for j in range(startColumn-1, startColumn + 2): #Loops check all 8 surrounding squares of the letter
-    #            try: #Index may be out of bounds, so try to access it and do nothing if it doessn't work
-    #                if letters2D[i][j] == nextLetter and usedLetters2D[i][j] == 0:
-    #                    usedLetters2D[i][j] = 1
-    #                    return i, j
-    #            except:
-    #                pass
-    #    return -1, None
