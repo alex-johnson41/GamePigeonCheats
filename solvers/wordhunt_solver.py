@@ -61,7 +61,7 @@ class WordHunt_Solver():
                 return True
         return False
 
-    #Recursive function to fine a path for the word on the board
+    #Recursive function to find a path for the word on the board
     def findNextLetter(self, startRow: int, startColumn: int, word: str, letterIndex: int) -> bool: #type: ignore
         if letterIndex >= len(word): #If it's reached the end of the word
             self.letterPath = self.usedLetters2D.copy()
